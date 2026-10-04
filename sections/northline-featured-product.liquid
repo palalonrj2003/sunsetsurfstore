@@ -1,0 +1,90 @@
+{% comment %}
+  Section: Northline Featured Product
+  Split layout with oversized product headline, price, description, and 16:10 featured visual.
+{% endcomment %}
+
+{%- liquid
+  assign featured_product = section.settings.product
+  if featured_product == blank
+    assign featured_product = collections.all.products.first
+  endif
+-%}
+
+{%- if featured_product != blank -%}
+  <section class="nl-featured-section" id="NorthlineFeatured-{{ section.id }}">
+    <div class="nl-featured-grid">
+      <div>
+        <p class="nl-featured-tag">
+          {{ section.settings.tag | default: 'Featured / 01' }}
+        </p>
+
+        <h2 class="nl-featured-title">
+          {{ featured_product.title }}
+        </h2>
+
+        <p class="nl-featured-price">
+          {{ featured_product.price | money }}
+        </p>
+
+        <p class="nl-featured-desc">
+          {{ featured_product.description | strip_html | truncate: 160 }}
+        </p>
+
+        <a href="{{ featured_product.url }}" class="nl-featured-link">
+          <span>Discover the piece</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <a href="{{ featured_product.url }}" class="nl-featured-media">
+        {%- if featured_product.featured_image != blank -%}
+          {{
+            featured_product.featured_image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '600, 900, 1200, 1400',
+              alt: featured_product.title
+          }}
+        {%- else -%}
+          <img
+            src="https://cdn.shopify.com/s/files/1/0857/3314/6867/files/NorthlinePufferJacket.jpg?v=1790580812"
+            alt="{{ featured_product.title }}"
+            loading="lazy"
+            width="1200"
+            height="750"
+          >
+        {%- endif -%}
+      </a>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Northline Featured Item",
+  "tag": "section",
+  "class": "northline-featured-wrapper",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured Product"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Tagline",
+      "default": "Featured / 01"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Northline Featured Item"
+    }
+  ]
+}
+{% endschema %}

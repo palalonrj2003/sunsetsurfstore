@@ -1,0 +1,923 @@
+/* ==========================================================================
+   Industrial-Luxury Redesign CSS for Sunset Surf Store
+   Combines Architectural / Brutalist-Refined Elegance with Warm Summer Coastal Energy
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=Petrona:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+:root {
+  /* Typography Tokens */
+  --font-heading--family: 'Syne', -apple-system, sans-serif;
+  --font-serif--family: 'Petrona', Georgia, serif;
+  --font-body--family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono--family: 'DM Mono', monospace;
+
+  /* Industrial-Luxury + Summer Color Palette */
+  --lux-black: #0c0d0e;
+  --lux-graphite: #151719;
+  --lux-charcoal: #212427;
+  --lux-sand: #f8f6f0;
+  --lux-sand-muted: #ece8df;
+  --lux-sand-dark: #ded8cb;
+  --lux-white: #ffffff;
+  --lux-border: #e2ded5;
+  --lux-border-dark: #26292d;
+  
+  /* Solar Summer Accents */
+  --solar-gold: #e59819;
+  --solar-gold-glow: rgba(229, 152, 25, 0.18);
+  --solar-amber: #d97706;
+  --solar-coral: #e0533c;
+  --solar-ocean: #0f2b3e;
+
+  /* UI Tokens */
+  --style-border-radius-buttons: 0px !important;
+  --style-border-radius-inputs: 0px !important;
+  --style-border-radius-cards: 0px !important;
+  --style-border-radius-popovers: 0px !important;
+  
+  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body, html {
+  font-family: var(--font-body--family);
+  color: var(--lux-black);
+  background-color: var(--lux-sand);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.lux-heading {
+  font-family: var(--font-heading--family);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--lux-black);
+  text-transform: uppercase;
+}
+
+.lux-serif {
+  font-family: var(--font-serif--family);
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.lux-mono {
+  font-family: var(--font-mono--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #76746e;
+}
+
+/* ==========================================================================
+   Industrial Buttons & Micro-Interactions
+   ========================================================================== */
+.editorial-btn,
+.lux-btn {
+  font-family: var(--font-mono--family);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0 !important;
+  overflow: hidden;
+  transition: all 0.3s var(--transition-fast);
+}
+
+.lux-btn--primary {
+  background-color: var(--lux-black);
+  color: var(--lux-white) !important;
+  border: 1px solid var(--lux-black);
+}
+
+.lux-btn--primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--solar-gold);
+  transform: translateY(100%);
+  transition: transform 0.35s var(--transition-smooth);
+  z-index: 1;
+}
+
+.lux-btn--primary:hover::before {
+  transform: translateY(0);
+}
+
+.lux-btn--primary > * {
+  position: relative;
+  z-index: 2;
+}
+
+.lux-btn--primary:hover {
+  color: var(--lux-black) !important;
+  border-color: var(--solar-gold);
+}
+
+.lux-btn--outline-white {
+  background-color: rgba(12, 13, 14, 0.4);
+  backdrop-filter: blur(8px);
+  color: var(--lux-white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.lux-btn--outline-white:hover {
+  background-color: var(--lux-white);
+  color: var(--lux-black) !important;
+  border-color: var(--lux-white);
+}
+
+.lux-btn--ghost {
+  background: transparent;
+  color: var(--lux-black) !important;
+  border: 1px solid var(--lux-black);
+}
+
+.lux-btn--ghost:hover {
+  background: var(--lux-black);
+  color: var(--lux-white) !important;
+}
+
+/* ==========================================================================
+   Industrial Header / Top Bar
+   ========================================================================== */
+.header-section {
+  background-color: var(--lux-sand) !important;
+  border-bottom: 1px solid var(--lux-border);
+}
+
+.header__logo-text,
+.header-logo-brand {
+  font-family: var(--font-heading--family) !important;
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--lux-black);
+}
+
+/* Announcement Bar */
+.announcement-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   Section: Industrial Marquee Ticker
+   ========================================================================== */
+.lux-marquee {
+  background-color: var(--lux-black);
+  color: var(--lux-sand);
+  padding: 14px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  user-select: none;
+  border-top: 1px solid var(--lux-border-dark);
+  border-bottom: 1px solid var(--lux-border-dark);
+}
+
+.lux-marquee__track {
+  display: flex;
+  gap: 40px;
+  animation: luxMarqueeLoop 32s linear infinite;
+}
+
+.lux-marquee:hover .lux-marquee__track {
+  animation-play-state: paused;
+}
+
+.lux-marquee__item {
+  font-family: var(--font-mono--family);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.lux-marquee__symbol {
+  color: var(--solar-gold);
+  font-size: 0.875rem;
+}
+
+@keyframes luxMarqueeLoop {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Section: Industrial-Luxury Hero
+   ========================================================================== */
+.editorial-hero {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  text-align: left;
+  overflow: hidden;
+  background-color: var(--lux-black);
+  color: var(--lux-white);
+  border-bottom: 1px solid var(--lux-border-dark);
+}
+
+.editorial-hero__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.editorial-hero__media img,
+.editorial-hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: contrast(1.08) brightness(0.92);
+  transform: scale(1.02);
+  transition: transform 8s var(--transition-smooth);
+}
+
+.editorial-hero:hover .editorial-hero__media img {
+  transform: scale(1.06);
+}
+
+.editorial-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 13, 14, 0.2) 0%,
+    rgba(12, 13, 14, 0.4) 50%,
+    rgba(12, 13, 14, 0.88) 100%
+  );
+  z-index: 2;
+}
+
+.editorial-hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1400px;
+  padding: 80px 36px 60px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.editorial-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-mono--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: var(--solar-gold);
+  text-transform: uppercase;
+}
+
+.editorial-hero__title {
+  font-family: var(--font-heading--family);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  max-width: 900px;
+}
+
+.editorial-hero__subtitle {
+  font-family: var(--font-serif--family);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  max-width: 680px;
+  line-height: 1.4;
+}
+
+.editorial-hero__cta-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Section: Industrial Category Grid (3 Columns)
+   ========================================================================== */
+.editorial-category-grid {
+  padding: 64px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.editorial-category-grid__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .editorial-category-grid__container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.editorial-category-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--lux-sand-muted);
+  border: 1px solid var(--lux-border);
+  display: block;
+  text-decoration: none;
+}
+
+.editorial-category-card__image-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-category-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--transition-smooth);
+}
+
+.editorial-category-card:hover .editorial-category-card__image-wrap img {
+  transform: scale(1.06);
+}
+
+.editorial-category-card__tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 4;
+  font-family: var(--font-mono--family);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  background: var(--lux-black);
+  color: var(--solar-gold);
+  padding: 4px 10px;
+  border: 1px solid var(--lux-border-dark);
+}
+
+.editorial-category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(12, 13, 14, 0.85) 100%
+  );
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+.editorial-category-card:hover .editorial-category-card__overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    rgba(12, 13, 14, 0.92) 100%
+  );
+}
+
+.editorial-category-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 28px;
+  z-index: 3;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.editorial-category-card__title {
+  font-family: var(--font-heading--family);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #ffffff;
+}
+
+.editorial-category-card__link-text {
+  font-family: var(--font-mono--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--solar-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.25s ease;
+}
+
+.editorial-category-card:hover .editorial-category-card__link-text {
+  gap: 10px;
+}
+
+/* ==========================================================================
+   Section: Industrial Technical Specs / Craftsmanship
+   ========================================================================== */
+.lux-specs {
+  background-color: var(--lux-sand-muted);
+  border-top: 1px solid var(--lux-border);
+  border-bottom: 1px solid var(--lux-border);
+  padding: 56px 32px;
+}
+
+.lux-specs__grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 990px) {
+  .lux-specs__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .lux-specs__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lux-spec-card {
+  border-left: 2px solid var(--solar-gold);
+  padding: 4px 0 4px 18px;
+}
+
+.lux-spec-card__code {
+  font-family: var(--font-mono--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  color: #8c897f;
+  margin: 0 0 4px;
+}
+
+.lux-spec-card__title {
+  font-family: var(--font-heading--family);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.lux-spec-card__text {
+  font-family: var(--font-body--family);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #5d5b54;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Section: Two-Column Split Story Feature
+   ========================================================================== */
+.editorial-split-feature {
+  padding: 64px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.editorial-split-feature__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 768px) {
+  .editorial-split-feature__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorial-split-card {
+  position: relative;
+  aspect-ratio: 16 / 13;
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  background-color: var(--lux-graphite);
+  border: 1px solid var(--lux-border);
+}
+
+.editorial-split-card__image-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.editorial-split-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--transition-smooth);
+}
+
+.editorial-split-card:hover .editorial-split-card__image-wrap img {
+  transform: scale(1.05);
+}
+
+.editorial-split-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 13, 14, 0.1) 0%,
+    rgba(12, 13, 14, 0.4) 40%,
+    rgba(12, 13, 14, 0.9) 100%
+  );
+  z-index: 2;
+}
+
+.editorial-split-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 36px;
+  z-index: 3;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.editorial-split-card__title {
+  font-family: var(--font-heading--family);
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0;
+  color: #ffffff;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.editorial-split-card__cta {
+  font-family: var(--font-mono--family);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--solar-gold);
+  border-bottom: 1px solid var(--solar-gold);
+  padding-bottom: 2px;
+}
+
+/* ==========================================================================
+   Product Grid & Responsive Shopping Improvements
+   ========================================================================== */
+.product-card {
+  background-color: var(--lux-white);
+  border: 1px solid var(--lux-border);
+  transition: all 0.35s var(--transition-fast);
+  position: relative;
+}
+
+.product-card:hover {
+  border-color: var(--lux-black);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
+}
+
+.product-card .price {
+  font-family: var(--font-mono--family) !important;
+  font-size: 0.875rem !important;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--lux-black);
+}
+
+/* ==========================================================================
+   Section: Scenic Middle Banner ("Start Here")
+   ========================================================================== */
+.editorial-start-here {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-color: var(--lux-black);
+  color: #ffffff;
+  border-top: 1px solid var(--lux-border-dark);
+  border-bottom: 1px solid var(--lux-border-dark);
+}
+
+.editorial-start-here__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.editorial-start-here__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) brightness(0.85);
+}
+
+.editorial-start-here__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 13, 14, 0.55);
+  z-index: 2;
+}
+
+.editorial-start-here__content {
+  position: relative;
+  z-index: 3;
+  max-width: 760px;
+  padding: 60px 28px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.editorial-start-here__title {
+  font-family: var(--font-heading--family);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #ffffff;
+}
+
+.editorial-start-here__text {
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Section: Magazine & Editorial Journal
+   ========================================================================== */
+.editorial-journal {
+  padding: 80px 32px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.editorial-journal__top-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+@media (max-width: 990px) {
+  .editorial-journal__top-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorial-journal__featured {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editorial-journal__featured-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--lux-border);
+}
+
+.editorial-journal__featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--transition-smooth);
+}
+
+.editorial-journal__featured:hover .editorial-journal__featured-img img {
+  transform: scale(1.04);
+}
+
+.editorial-journal__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.editorial-journal__card-img {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--lux-border);
+}
+
+.editorial-journal__card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--transition-smooth);
+}
+
+.editorial-journal__card:hover .editorial-journal__card-img img {
+  transform: scale(1.04);
+}
+
+.editorial-journal__bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  border-top: 1px solid var(--lux-border);
+  padding-top: 56px;
+}
+
+@media (max-width: 768px) {
+  .editorial-journal__bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorial-journal__wide-story {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editorial-journal__wide-img {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--lux-border);
+}
+
+.editorial-journal__wide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--transition-smooth);
+}
+
+.editorial-journal__wide-story:hover .editorial-journal__wide-img img {
+  transform: scale(1.04);
+}
+
+/* ==========================================================================
+   Section: Industrial VIP Newsletter Club Access
+   ========================================================================== */
+.editorial-newsletter {
+  background-color: var(--lux-black) !important;
+  color: var(--lux-white);
+  padding: 96px 32px;
+  text-align: center;
+  border-top: 1px solid var(--lux-border-dark);
+}
+
+.editorial-newsletter__container {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.editorial-newsletter__badge {
+  font-family: var(--font-mono--family);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  color: var(--solar-gold);
+  border: 1px solid rgba(229, 152, 25, 0.4);
+  padding: 4px 14px;
+}
+
+.editorial-newsletter__title {
+  font-family: var(--font-heading--family);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.editorial-newsletter__text {
+  font-family: var(--font-body--family);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 16px;
+}
+
+.editorial-newsletter__form {
+  width: 100%;
+  display: flex;
+  max-width: 500px;
+  background: var(--lux-graphite);
+  border: 1px solid var(--lux-border-dark);
+  transition: border-color 0.25s ease;
+}
+
+.editorial-newsletter__form:focus-within {
+  border-color: var(--solar-gold);
+}
+
+.editorial-newsletter__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 16px 20px;
+  font-family: var(--font-mono--family);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background: transparent;
+}
+
+.editorial-newsletter__input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.editorial-newsletter__submit {
+  border: none;
+  background: var(--solar-gold);
+  color: var(--lux-black);
+  font-family: var(--font-mono--family);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.editorial-newsletter__submit:hover {
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+footer,
+.site-footer {
+  background-color: var(--lux-black) !important;
+  color: var(--lux-white) !important;
+  border-top: 1px solid var(--lux-border-dark);
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: var(--solar-gold) !important;
+}

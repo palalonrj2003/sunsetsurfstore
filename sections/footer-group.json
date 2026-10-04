@@ -1,0 +1,16 @@
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "northline_footer": {
+      "type": "northline-footer",
+      "settings": {
+        "brand_name": "Sunset Surf",
+        "tagline": "Coastal essentials with a modern uniform mindset."
+      }
+    }
+  },
+  "order": [
+    "northline_footer"
+  ]
+}

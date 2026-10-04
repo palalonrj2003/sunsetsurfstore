@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "northline_hero": {
+      "type": "northline-hero",
+      "settings": {
+        "collection_label": "Sunset Surf / Collection 01",
+        "title": "Sunset Surf",
+        "description": "Heavyweight hoodies, caps, and sets. A focused uniform for coastal days.",
+        "btn_text": "Shop the collection",
+        "btn_link": "#products"
+      }
+    },
+    "northline_featured": {
+      "type": "northline-featured-product",
+      "settings": {
+        "tag": "Featured / 01"
+      }
+    },
+    "northline_collection": {
+      "type": "northline-collection-grid",
+      "settings": {
+        "subtitle": "Curated essentials",
+        "title": "The Collection",
+        "products_to_show": 12
+      }
+    }
+  },
+  "order": [
+    "northline_hero",
+    "northline_featured",
+    "northline_collection"
+  ]
+}

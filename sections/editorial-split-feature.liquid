@@ -1,0 +1,97 @@
+{% comment %}
+  Section: Editorial Split Feature (2 Columns)
+  Two side-by-side featured story blocks matching Tracksmith / Editorial style.
+{% endcomment %}
+
+<div class="editorial-split-feature" id="EditorialSplitFeature-{{ section.id }}">
+  <div class="editorial-split-feature__grid">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link | default: '/collections/all' }}" class="editorial-split-card" {{ block.shopify_attributes }}>
+        <div class="editorial-split-card__image-wrap">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '600, 900, 1200',
+                alt: block.settings.title
+            }}
+          {%- else -%}
+            {%- if forloop.first -%}
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Sacred Waves" loading="lazy" width="1200" height="1200">
+            {%- else -%}
+              <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=1200&q=80" alt="Fall Collection" loading="lazy" width="1200" height="1200">
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        <div class="editorial-split-card__overlay"></div>
+
+        <div class="editorial-split-card__content">
+          <h3 class="editorial-split-card__title">{{ block.settings.title }}</h3>
+          <span class="editorial-split-card__cta">{{ block.settings.cta_text | default: 'Explore Story' }}</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Editorial Split Feature",
+  "tag": "section",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "feature_block",
+      "name": "Story Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Feature Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Sacred Waves & Ritual."
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "Explore Collection"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Split Feature",
+      "blocks": [
+        {
+          "type": "feature_block",
+          "settings": {
+            "title": "Sacred Waves & Ritual.",
+            "cta_text": "Shop The Collection"
+          }
+        },
+        {
+          "type": "feature_block",
+          "settings": {
+            "title": "Fall '24 Drop",
+            "cta_text": "View Lookbook"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

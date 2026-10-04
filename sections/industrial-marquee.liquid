@@ -1,0 +1,44 @@
+{% comment %}
+  Section: Industrial Marquee Ticker
+  Infinite looping motion ticker with technical symbols & brand statements.
+{% endcomment %}
+
+<div class="lux-marquee" id="IndustrialMarquee-{{ section.id }}" style="background-color: {{ section.settings.bg_color | default: '#0c0d0e' }};">
+  <div class="lux-marquee__track">
+    {%- for i in (1..6) -%}
+      <div class="lux-marquee__item">
+        <span>SUNSET SURF ARCHIVE</span>
+        <span class="lux-marquee__symbol">&#10022;</span>
+        <span>480 GSM HEAVYWEIGHT COTTON</span>
+        <span class="lux-marquee__symbol">&#10022;</span>
+        <span>ARTISAN EMBROIDERY</span>
+        <span class="lux-marquee__symbol">&#10022;</span>
+        <span>LIMITED DROP SS-25</span>
+        <span class="lux-marquee__symbol">&#10022;</span>
+        <span>PACIFIC COAST ETHOS</span>
+        <span class="lux-marquee__symbol">&#10022;</span>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Industrial Marquee",
+  "tag": "section",
+  "class": "industrial-marquee-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#0c0d0e"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Industrial Marquee"
+    }
+  ]
+}
+{% endschema %}

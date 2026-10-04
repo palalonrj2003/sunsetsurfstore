@@ -1,0 +1,106 @@
+{% comment %}
+  Section: Editorial Scenic Banner ("Start Here")
+{% endcomment %}
+
+<div class="editorial-start-here" id="EditorialStartHere-{{ section.id }}">
+  <div class="editorial-start-here__media">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2600
+        | image_tag:
+          loading: 'lazy',
+          widths: '750, 1100, 1600, 2200, 2600',
+          alt: section.settings.title
+      }}
+    {%- else -%}
+      <img
+        src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=80"
+        alt="Scenic Road & Nature"
+        loading="lazy"
+        width="2400"
+        height="1200"
+      >
+    {%- endif -%}
+  </div>
+
+  <div class="editorial-start-here__overlay"></div>
+
+  <div class="editorial-start-here__content">
+    {%- if section.settings.title != blank -%}
+      <h2 class="editorial-start-here__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="editorial-start-here__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <div class="editorial-start-here__cta-group">
+      {%- if section.settings.btn_1_text != blank -%}
+        <a href="{{ section.settings.btn_1_link | default: '/collections/all' }}" class="editorial-btn editorial-btn--outline-white">
+          {{ section.settings.btn_1_text }}
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.btn_2_text != blank -%}
+        <a href="{{ section.settings.btn_2_link | default: '/pages/about' }}" class="editorial-btn editorial-btn--outline-white">
+          {{ section.settings.btn_2_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Editorial Scenic Banner",
+  "tag": "section",
+  "class": "editorial-start-here-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Scenic Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Start Here"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Find the everyday coastal essentials designed for the beach, morning runs, and beyond."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Button 1 Text",
+      "default": "Shop Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Button 2 Text",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Button 2 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Scenic Banner"
+    }
+  ]
+}
+{% endschema %}

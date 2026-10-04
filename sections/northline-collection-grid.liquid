@@ -1,0 +1,153 @@
+{% comment %}
+  Section: Northline Collection Grid for Sunset Surf Apparel
+  Curated essentials header, piece count, 3-column product grid with 3:4 cards, hover overlays, and quick add.
+{% endcomment %}
+
+{%- liquid
+  assign target_collection = section.settings.collection
+  if target_collection == blank
+    assign target_collection = collections.all
+  endif
+  assign limit = section.settings.products_to_show | default: 12
+-%}
+
+<section id="products" class="nl-collection-section">
+  <div class="nl-collection-header">
+    <div>
+      <p class="nl-collection-subtitle">
+        {{ section.settings.subtitle | default: 'Curated essentials' }}
+      </p>
+      <h2 class="nl-collection-title">
+        {{ section.settings.title | default: 'The Collection' }}
+      </h2>
+    </div>
+    <p class="nl-collection-count">
+      {{ target_collection.products_count | default: target_collection.products.size }} PIECES
+    </p>
+  </div>
+
+  <div class="nl-products-grid">
+    {%- for product in target_collection.products limit: limit -%}
+      {%- assign index_num = forloop.index -%}
+      <article class="nl-product-card">
+        <a href="{{ product.url }}" class="nl-product-media">
+          {%- if product.featured_image != blank -%}
+            {{
+              product.featured_image
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720, 900',
+                alt: product.title
+            }}
+          {%- else -%}
+            <div style="display:flex;height:100%;align-items:center;justify-content:center;color:var(--nl-muted-foreground);font-style:italic;">
+              No image
+            </div>
+          {%- endif -%}
+
+          <div class="nl-product-hover-overlay">
+            <div class="nl-product-view-badge">
+              <span>View piece</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <div class="nl-product-info">
+          <div class="nl-product-meta">
+            <span class="nl-product-tag">
+              SS / {% if index_num < 10 %}0{% endif %}{{ index_num }}
+            </span>
+            <span class="nl-product-price">
+              {{ product.price | money }}
+            </span>
+          </div>
+
+          <a href="{{ product.url }}" class="nl-product-title-link">
+            {{ product.title }}
+          </a>
+
+          {%- if product.available -%}
+            <form method="post" action="{{ routes.cart_add_url }}" class="nl-product-form">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="nl-product-add-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>Add to cart</span>
+              </button>
+            </form>
+          {%- else -%}
+            <button type="button" class="nl-product-add-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+              <span>Sold out</span>
+            </button>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- else -%}
+      {%- for i in (1..3) -%}
+        <article class="nl-product-card">
+          <div class="nl-product-media">
+            <img src="https://www.sunsetsurfstore.com/cdn/shop/files/SunsetSurfDuluth-191.jpg?v=1752118681&width=900" alt="Sample Product" loading="lazy" width="600" height="800">
+          </div>
+          <div class="nl-product-info">
+            <div class="nl-product-meta">
+              <span class="nl-product-tag">SS / 0{{ i }}</span>
+              <span class="nl-product-price">$85.00</span>
+            </div>
+            <a href="{{ routes.all_products_collection_url }}" class="nl-product-title-link">Sunset Surf Essential Piece 0{{ i }}</a>
+            <button class="nl-product-add-btn" type="button">
+              <span>+ Add to cart</span>
+            </button>
+          </div>
+        </article>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Northline Collection Grid",
+  "tag": "section",
+  "class": "northline-collection-wrapper",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Curated essentials"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Northline Collection Grid"
+    }
+  ]
+}
+{% endschema %}

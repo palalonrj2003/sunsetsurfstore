@@ -1,0 +1,105 @@
+{% comment %}
+  Section: Northline Hero for Sunset Surf Apparel
+  Exact conversion of the React near-full-screen hero with collection label, oversized display title, description, and scroll indicator.
+{% endcomment %}
+
+<section class="nl-hero" id="NorthlineHero-{{ section.id }}">
+  <div class="nl-hero-bg">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 2800
+        | image_tag:
+          class: 'animate-image-reveal',
+          loading: 'eager',
+          fetchpriority: 'high',
+          widths: '750, 1100, 1500, 2000, 2800',
+          alt: section.settings.title
+      }}
+    {%- else -%}
+      <img
+        src="https://www.sunsetsurfstore.com/cdn/shop/files/V1_SunsetSurfCollection-172.jpg?v=1784829485"
+        alt="{{ section.settings.title | default: 'Sunset Surf Apparel' }}"
+        class="animate-image-reveal"
+        loading="eager"
+        fetchpriority="high"
+        width="2400"
+        height="1400"
+      >
+    {%- endif -%}
+    <div class="nl-hero-gradient"></div>
+  </div>
+
+  <div class="nl-hero-content">
+    <p class="nl-hero-label animate-reveal-up">
+      {{ section.settings.collection_label | default: 'Sunset Surf / Collection 01' }}
+    </p>
+
+    <h1 class="nl-hero-title animate-reveal-up reveal-delay-1">
+      {{ section.settings.title | default: 'SUNSET SURF' }}
+    </h1>
+
+    <p class="nl-hero-desc animate-reveal-up reveal-delay-2">
+      {{ section.settings.description | default: 'Heavyweight hoodies, caps, and sets. A focused uniform for coastal days.' }}
+    </p>
+
+    <a href="{{ section.settings.btn_link | default: '#products' }}" class="nl-hero-btn animate-reveal-up reveal-delay-3">
+      <span>{{ section.settings.btn_text | default: 'Shop the collection' }}</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+
+    <div class="nl-hero-line animate-line-grow" aria-hidden="true"></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Northline Hero",
+  "tag": "section",
+  "class": "northline-hero-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Lifestyle Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_label",
+      "label": "Collection Label",
+      "default": "Sunset Surf / Collection 01"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Oversized Brand Title",
+      "default": "SUNSET SURF"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Short Description",
+      "default": "Heavyweight hoodies, caps, and sets. A focused uniform for coastal days."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Northline Hero"
+    }
+  ]
+}
+{% endschema %}

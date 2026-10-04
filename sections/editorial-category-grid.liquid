@@ -1,0 +1,113 @@
+{% comment %}
+  Section: Industrial Category Grid (3 Columns)
+{% endcomment %}
+
+<div class="editorial-category-grid" id="EditorialCategoryGrid-{{ section.id }}">
+  <div class="editorial-category-grid__container">
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link | default: '/collections/all' }}" class="editorial-category-card" {{ block.shopify_attributes }}>
+        <span class="editorial-category-card__tag">
+          CAT.0{{ forloop.index }} // {{ block.settings.title | upcase }}
+        </span>
+
+        <div class="editorial-category-card__image-wrap">
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                widths: '360, 540, 720, 900',
+                alt: block.settings.title
+            }}
+          {%- else -%}
+            {%- case forloop.index -%}
+              {%- when 1 -%}
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=800&q=80" alt="Apparel" loading="lazy" width="800" height="1000">
+              {%- when 2 -%}
+                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80" alt="Footwear" loading="lazy" width="800" height="1000">
+              {%- when 3 -%}
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=800&q=80" alt="Accessories" loading="lazy" width="800" height="1000">
+            {%- endcase -%}
+          {%- endif -%}
+        </div>
+
+        <div class="editorial-category-card__overlay"></div>
+
+        <div class="editorial-category-card__content">
+          <h3 class="editorial-category-card__title">{{ block.settings.title }}</h3>
+          <span class="editorial-category-card__link-text">
+            <span>{{ block.settings.link_text | default: 'Shop Archive' }}</span>
+            <span>&rarr;</span>
+          </span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Industrial Category Grid",
+  "tag": "section",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Apparel"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Shop Archive"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Industrial Category Grid",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "Apparel",
+            "link_text": "Shop Archive"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "Matching Sets",
+            "link_text": "Shop Archive"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "Accessories",
+            "link_text": "Shop Archive"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

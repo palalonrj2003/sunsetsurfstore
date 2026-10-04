@@ -1,0 +1,152 @@
+{% comment %}
+  Section: The Journal (Editorial Magazine Layout)
+  Asymmetrical blog/magazine layout matching Tracksmith reference.
+{% endcomment %}
+
+<div class="editorial-journal" id="EditorialJournal-{{ section.id }}">
+  <div class="editorial-section-header">
+    <h2 class="editorial-section-title">{{ section.settings.heading | default: 'The Journal' }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="editorial-section-subtitle">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="editorial-journal__top-grid">
+    <!-- Main Left Feature -->
+    <div class="editorial-journal__featured">
+      <div class="editorial-journal__featured-img">
+        {%- if section.settings.feat_image != blank -%}
+          {{ section.settings.feat_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.feat_title }}
+        {%- else -%}
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80" alt="Sunset Surf Community" loading="lazy" width="900" height="675">
+        {%- endif -%}
+      </div>
+      <span class="editorial-journal__meta">{{ section.settings.feat_tag | default: 'COMMUNITY & ROOTS' }}</span>
+      <h3 class="editorial-journal__card-title" style="font-size: 1.5rem;">{{ section.settings.feat_title | default: 'Welcome to the Sunset Surf Club: Fall Horizons' }}</h3>
+      <p class="editorial-journal__card-excerpt">{{ section.settings.feat_excerpt | default: 'A look into our latest collection, coastal traditions, and the community that brings it to life every morning.' }}</p>
+      <a href="{{ section.settings.feat_link | default: '/blogs/news' }}" class="editorial-link">Read Story &rarr;</a>
+    </div>
+
+    <!-- Right Stack Column 1 -->
+    <div class="editorial-journal__card-stack" style="display: flex; flex-direction: column; gap: 28px;">
+      <div class="editorial-journal__card">
+        <div class="editorial-journal__card-img">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80" alt="Morning Swell" loading="lazy" width="600" height="337">
+        </div>
+        <span class="editorial-journal__meta">FIELD GUIDE</span>
+        <h4 class="editorial-journal__card-title">Dawn Patrol & Morning Swell</h4>
+        <p class="editorial-journal__card-excerpt">How coastal early mornings inspire our heavyweight embroidery and fits.</p>
+        <a href="/blogs/news" class="editorial-link">Read Story &rarr;</a>
+      </div>
+
+      <div class="editorial-journal__card">
+        <div class="editorial-journal__card-img">
+          <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=600&q=80" alt="Stitch & Craft" loading="lazy" width="600" height="337">
+        </div>
+        <span class="editorial-journal__meta">CRAFT</span>
+        <h4 class="editorial-journal__card-title">Heavyweight Cotton & Stitch</h4>
+        <p class="editorial-journal__card-excerpt">Behind the scenes of our artisanal manta ray and sea turtle embroidery.</p>
+        <a href="/blogs/news" class="editorial-link">Read Story &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Right Stack Column 2 -->
+    <div class="editorial-journal__card-stack" style="display: flex; flex-direction: column; gap: 28px;">
+      <div class="editorial-journal__card">
+        <div class="editorial-journal__card-img">
+          <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80" alt="Soundtrack" loading="lazy" width="600" height="337">
+        </div>
+        <span class="editorial-journal__meta">SOUNDTRACK</span>
+        <h4 class="editorial-journal__card-title">Golden Hour Tape Vol. 4</h4>
+        <p class="editorial-journal__card-excerpt">A curated 60-minute sonic journey for warm drives and sunset wind-downs.</p>
+        <a href="/blogs/news" class="editorial-link">Listen Now &rarr;</a>
+      </div>
+
+      <div class="editorial-journal__card">
+        <div class="editorial-journal__card-img">
+          <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80" alt="Trail Run" loading="lazy" width="600" height="337">
+        </div>
+        <span class="editorial-journal__meta">CONSERVATION</span>
+        <h4 class="editorial-journal__card-title">Coastal Stewardship Project</h4>
+        <p class="editorial-journal__card-excerpt">Our partnership with local ocean initiatives to preserve shoreline habitats.</p>
+        <a href="/blogs/news" class="editorial-link">Read Story &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Split Features -->
+  <div class="editorial-journal__bottom-grid">
+    <div class="editorial-journal__wide-story">
+      <div class="editorial-journal__wide-img">
+        <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=800&q=80" alt="Foundation" loading="lazy" width="800" height="450">
+      </div>
+      <h3 class="editorial-journal__card-title" style="font-size: 1.6rem;">The Sunset Foundation</h3>
+      <p class="editorial-journal__card-excerpt">Supporting ocean preservation and accessible surf education for the next generation of wave riders.</p>
+      <a href="/pages/about" class="editorial-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="editorial-journal__wide-story">
+      <div class="editorial-journal__wide-img">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Community" loading="lazy" width="800" height="450">
+      </div>
+      <h3 class="editorial-journal__card-title" style="font-size: 1.6rem;">For the Love of the Ocean</h3>
+      <p class="editorial-journal__card-excerpt">Connecting creators, surfers, runners, and dreamers under one coastal ethos.</p>
+      <a href="/pages/about" class="editorial-link">Read Story &rarr;</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "The Journal (Magazine)",
+  "tag": "section",
+  "class": "editorial-journal-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Journal"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Stories, field guides, and dispatches from the coast"
+    },
+    {
+      "type": "image_picker",
+      "id": "feat_image",
+      "label": "Featured Article Image"
+    },
+    {
+      "type": "text",
+      "id": "feat_tag",
+      "label": "Featured Tag",
+      "default": "COMMUNITY & ROOTS"
+    },
+    {
+      "type": "text",
+      "id": "feat_title",
+      "label": "Featured Title",
+      "default": "Welcome to the Sunset Surf Club: Fall Horizons"
+    },
+    {
+      "type": "textarea",
+      "id": "feat_excerpt",
+      "label": "Featured Excerpt",
+      "default": "A look into our latest collection, coastal traditions, and the community that brings it to life every morning."
+    },
+    {
+      "type": "url",
+      "id": "feat_link",
+      "label": "Featured Article Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Journal (Magazine)"
+    }
+  ]
+}
+{% endschema %}

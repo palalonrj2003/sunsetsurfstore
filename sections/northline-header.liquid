@@ -1,0 +1,94 @@
+{% comment %}
+  Section: Northline Header with Sunset Surf Logo
+  Minimal sticky navbar with brand logo, Shop link, dynamic cart counter, and announcement strip.
+{% endcomment %}
+
+<header class="nl-header-wrapper" id="NorthlineHeader">
+  <div class="nl-header-inner">
+    <a href="{{ routes.root_url }}" class="nl-header-brand" aria-label="{{ shop.name | default: 'SUNSET SURF APPAREL' }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag: class: 'nl-header-logo-img', alt: shop.name }}
+      {%- else -%}
+        <img
+          src="https://www.sunsetsurfstore.com/cdn/shop/files/IMG-8718.png?v=1790864615"
+          alt="SUNSET SURF APPAREL"
+          class="nl-header-logo-img"
+          loading="eager"
+          width="180"
+          height="54"
+        >
+      {%- endif -%}
+    </a>
+
+    <nav class="nl-header-nav">
+      <a href="{{ routes.all_products_collection_url }}" class="nl-header-nav-link">
+        Shop
+      </a>
+
+      <button type="button" class="nl-cart-btn" aria-label="Open cart" onclick="window.location.href='{{ routes.cart_url }}'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="21" r="1"></circle>
+          <circle cx="19" cy="21" r="1"></circle>
+          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="nl-cart-badge">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </button>
+    </nav>
+  </div>
+
+  <div class="nl-announcement-strip">
+    <p class="nl-announcement-text">
+      {{ section.settings.announcement | default: 'Opening soon · Early access' }}
+    </p>
+  </div>
+</header>
+
+<script>
+  (function() {
+    const header = document.getElementById('NorthlineHeader');
+    if (!header) return;
+    const handleScroll = () => {
+      if (window.scrollY > 8) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Northline Header",
+  "tag": "section",
+  "class": "northline-header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Custom Brand Logo"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name Fallback",
+      "default": "Sunset Surf"
+    },
+    {
+      "type": "text",
+      "id": "announcement",
+      "label": "Announcement Text",
+      "default": "Opening soon · Early access"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Northline Header"
+    }
+  ]
+}
+{% endschema %}

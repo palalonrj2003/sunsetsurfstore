@@ -1,0 +1,79 @@
+{% comment %}
+  Section: Industrial VIP Newsletter Club Access
+{% endcomment %}
+
+<div class="editorial-newsletter" id="EditorialNewsletter-{{ section.id }}">
+  <div class="editorial-newsletter__container">
+    <span class="editorial-newsletter__badge">SECTOR: SUNSET SURF CLUB // VIP ACCESS</span>
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="editorial-newsletter__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="editorial-newsletter__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {% form 'customer', class: 'editorial-newsletter__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter,vip">
+      <input
+        type="email"
+        name="contact[email]"
+        class="editorial-newsletter__input"
+        value="{{ form.email }}"
+        placeholder="{{ section.settings.placeholder | default: 'YOUR EMAIL // ENTER ACCESS CODE' }}"
+        autocorrect="off"
+        autocapitalize="off"
+        autocomplete="email"
+        required
+      >
+      <button type="submit" class="editorial-newsletter__submit" name="commit">
+        {{ section.settings.button_text | default: 'REQUEST PASS' }}
+      </button>
+      {%- if form.posted_successfully? -%}
+        <p class="editorial-newsletter__success" style="color: #e59819; margin-top: 10px; font-family: var(--font-mono--family); font-size: 0.8125rem; letter-spacing: 0.1em;">
+          CONFIRMED // WELCOME TO THE SUNSET SURF ARCHIVE.
+        </p>
+      {%- endif -%}
+    {% endform %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Industrial Newsletter",
+  "tag": "section",
+  "class": "editorial-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "JOIN THE SUNSET SURF ARCHIVE"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subtitle",
+      "default": "Gain private 24-hour early access to upcoming heavyweight drops, subscriber-only gifts, and field journals from the Pacific."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "ENTER EMAIL FOR ARCHIVE ACCESS"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "JOIN NOW"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Industrial Newsletter"
+    }
+  ]
+}
+{% endschema %}

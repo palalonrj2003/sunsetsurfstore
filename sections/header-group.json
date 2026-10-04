@@ -1,0 +1,16 @@
+{
+  "type": "header",
+  "name": "t:names.header",
+  "sections": {
+    "northline_header": {
+      "type": "northline-header",
+      "settings": {
+        "brand_name": "Sunset Surf",
+        "announcement": "Opening soon · Early access"
+      }
+    }
+  },
+  "order": [
+    "northline_header"
+  ]
+}

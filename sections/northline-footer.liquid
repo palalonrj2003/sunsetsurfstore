@@ -1,0 +1,48 @@
+{% comment %}
+  Section: Northline Footer for Sunset Surf Apparel
+  Dark minimalist footer with oversized brand title, tagline, and Shopify checkout notice.
+{% endcomment %}
+
+<footer class="nl-footer" id="NorthlineFooter">
+  <div class="nl-footer-inner">
+    <div class="nl-footer-top">
+      <h2 class="nl-footer-brand">
+        {{ section.settings.brand_name | default: 'SUNSET SURF APPAREL' }}
+      </h2>
+      <p class="nl-footer-tagline">
+        {{ section.settings.tagline | default: 'Coastal essentials with a modern uniform mindset.' }}
+      </p>
+    </div>
+
+    <p class="nl-footer-bottom-note">
+      Checkout powered by Shopify
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Northline Footer",
+  "tag": "section",
+  "class": "northline-footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "SUNSET SURF APPAREL"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Coastal essentials with a modern uniform mindset."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Northline Footer"
+    }
+  ]
+}
+{% endschema %}
