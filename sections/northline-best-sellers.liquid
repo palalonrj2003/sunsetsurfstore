@@ -1,0 +1,191 @@
+{% comment %}
+  Section: Northline Best Sellers for Sunset Surf Apparel
+  4 Products Desktop / 2 Products Mobile with exact Northline product card layout and micro-interactions.
+{% endcomment %}
+
+{%- liquid
+  assign featured_collection = section.settings.collection
+  if featured_collection == blank
+    assign featured_collection = collections.all
+  endif
+-%}
+
+<section class="nl-bestsellers-section" id="bestsellers">
+  <div class="nl-container">
+    <div class="nl-collection-header" style="margin-bottom: 32px; border-bottom: none; padding-bottom: 0;">
+      <div>
+        <p class="nl-collection-subtitle">
+          {{ section.settings.eyebrow | default: 'Most Loved' }}
+        </p>
+        <h2 class="nl-collection-title font-display">
+          {{ section.settings.title | default: 'Most Loved' }}
+        </h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="nl-bestsellers-subtext font-sans">
+            {{ section.settings.subtitle }}
+          </p>
+        {% endif %}
+      </div>
+      <p class="nl-collection-count font-sans">
+        CURATED ESSENTIALS
+      </p>
+    </div>
+
+    <div class="nl-bestsellers-grid">
+      {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+        {%- for product in featured_collection.products limit: 4 -%}
+          {%- assign index_num = forloop.index -%}
+          <article class="nl-product-card">
+            <a href="{{ product.url }}" class="nl-product-media">
+              {%- if product.featured_image != blank -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 900
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '360, 540, 720, 900',
+                    alt: product.title
+                }}
+              {%- else -%}
+                <div style="display:flex;height:100%;align-items:center;justify-content:center;color:var(--nl-muted-foreground);font-style:italic;">
+                  No image
+                </div>
+              {%- endif -%}
+
+              <div class="nl-product-hover-overlay">
+                <div class="nl-product-view-badge">
+                  <span>View piece</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </a>
+
+            <div class="nl-product-info">
+              <div class="nl-product-meta">
+                <span class="nl-product-tag">
+                  TOP / 0{{ index_num }}
+                </span>
+                <span class="nl-product-price">
+                  {{ product.price | money }}
+                </span>
+              </div>
+
+              <a href="{{ product.url }}" class="nl-product-title-link">
+                {{ product.title }}
+              </a>
+
+              {%- if product.available -%}
+                <form method="post" action="{{ routes.cart_add_url }}" class="nl-product-form">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <button type="submit" class="nl-product-add-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Add to cart</span>
+                  </button>
+                </form>
+              {%- else -%}
+                <button type="button" class="nl-product-add-btn" disabled style="opacity: 0.5; cursor: not-allowed;">
+                  <span>Sold out</span>
+                </button>
+              {%- endif -%}
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- assign sample_titles = "Hibiscus Knit Sweater,Shell Knit Sweater,Palm Tropics Zip Up,Navy Shell Long Sleeve" | split: "," -%}
+        {%- assign sample_imgs = "https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-9_0cb1e699-abea-4c22-86fe-5e84ef1ef6c0.jpg?v=1789700454,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-6_3b6484f2-3eee-4b82-b032-582197b952f0.jpg?v=1789751841,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-127.jpg?v=1789758542,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-26.jpg?v=1789668255" | split: "," -%}
+        {%- assign sample_prices = "$88.00,$92.00,$110.00,$58.00" | split: "," -%}
+        
+        {%- for i in (0..3) -%}
+          <article class="nl-product-card">
+            <a href="/collections/all" class="nl-product-media">
+              <img src="{{ sample_imgs[i] }}" alt="{{ sample_titles[i] }}" loading="lazy" width="600" height="800">
+              <div class="nl-product-hover-overlay">
+                <div class="nl-product-view-badge">
+                  <span>View piece</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+              </div>
+            </a>
+            <div class="nl-product-info">
+              <div class="nl-product-meta">
+                <span class="nl-product-tag">TOP / 0{{ i | plus: 1 }}</span>
+                <span class="nl-product-price">{{ sample_prices[i] }}</span>
+              </div>
+              <a href="/collections/all" class="nl-product-title-link">{{ sample_titles[i] }}</a>
+              <button class="nl-product-add-btn" type="button">
+                <span>Add to cart</span>
+              </button>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {% if section.settings.btn_text != blank %}
+      <div class="nl-bestsellers-cta">
+        <a href="{{ section.settings.btn_link | default: featured_collection.url | default: '/collections/all' }}" class="nl-btn-editorial">
+          <span>{{ section.settings.btn_text }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "tag": "section",
+  "class": "section-northline-bestsellers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Customer Favorites"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Most Loved"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Customer favorites chosen for comfort, quality, and style."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Source Collection"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Shop Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers"
+    }
+  ]
+}
+{% endschema %}

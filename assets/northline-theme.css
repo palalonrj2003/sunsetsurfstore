@@ -129,6 +129,7 @@ body, html {
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  position: relative;
 }
 
 @media (min-width: 640px) {
@@ -139,6 +140,12 @@ body, html {
   .nl-header-inner { padding: 0 48px; }
 }
 
+.nl-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .nl-header-brand {
   display: inline-flex;
   align-items: center;
@@ -146,72 +153,226 @@ body, html {
 }
 
 .nl-header-logo-img {
-  height: 42px;
+  height: 40px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
-.nl-header-brand-text {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--nl-foreground);
+/* Desktop Nav Menu */
+.nl-header-nav {
+  display: none;
+  align-items: center;
+  gap: 32px;
 }
 
-.nl-header-nav {
+@media (min-width: 900px) {
+  .nl-header-nav {
+    display: flex;
+  }
+}
+
+.nl-nav-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-@media (min-width: 640px) {
-  .nl-header-nav { gap: 32px; }
+  height: 68px;
 }
 
 .nl-header-nav-link {
-  display: none;
-  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.24em;
-  color: var(--nl-muted-foreground);
+  letter-spacing: 0.2em;
+  color: #222222;
   text-decoration: none;
   transition: color 0.2s ease;
-}
-
-@media (min-width: 640px) {
-  .nl-header-nav-link { display: block; }
+  padding: 8px 0;
 }
 
 .nl-header-nav-link:hover {
+  color: #000000;
+}
+
+.nl-nav-chevron {
+  transition: transform 0.2s ease;
+  opacity: 0.6;
+}
+
+.nl-nav-item:hover .nl-nav-chevron {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Mega Dropdown for Shop */
+.nl-mega-dropdown {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  width: 780px;
+  background-color: #ffffff;
+  border: 1px solid var(--nl-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  z-index: 100;
+}
+
+.nl-nav-dropdown-parent:hover .nl-mega-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nl-mega-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 32px;
+  gap: 24px;
+}
+
+.nl-mega-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nl-mega-heading {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: var(--nl-foreground);
+  text-decoration: none;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--nl-border);
+}
+
+.nl-mega-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nl-mega-list li a {
+  font-size: 12px;
+  color: var(--nl-muted-foreground);
+  text-decoration: none;
+  transition: color 0.18s ease;
+  line-height: 1.4;
+}
+
+.nl-mega-list li a:hover {
+  color: var(--nl-foreground);
+}
+
+/* Simple Dropdown for Collections & About */
+.nl-dropdown-simple {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  min-width: 210px;
+  background-color: #ffffff;
+  border: 1px solid var(--nl-border);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 100;
+}
+
+.nl-nav-dropdown-parent:hover .nl-dropdown-simple {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nl-dropdown-list {
+  list-style: none;
+  padding: 14px 0;
+  margin: 0;
+}
+
+.nl-dropdown-list li a {
+  display: block;
+  padding: 8px 20px;
+  font-size: 12px;
+  color: var(--nl-muted-foreground);
+  text-decoration: none;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nl-dropdown-list li a:hover {
+  color: var(--nl-foreground);
+  background-color: #f7f7f7;
+}
+
+.nl-dropdown-divider {
+  height: 1px;
+  background-color: var(--nl-border);
+  margin: 8px 0;
+}
+
+.nl-dropdown-featured {
+  font-weight: 500;
+  color: var(--nl-foreground) !important;
+}
+
+/* Header Right & Cart */
+.nl-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nl-cart-btn {
   background: transparent;
   border: none;
-  padding: 8px;
+  padding: 8px 12px;
   cursor: pointer;
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   color: var(--nl-foreground);
+  transition: opacity 0.2s ease;
 }
 
 .nl-cart-btn:hover {
-  background-color: var(--nl-secondary);
+  opacity: 0.65;
+}
+
+.nl-cart-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .nl-cart-label {
+    display: inline;
+  }
 }
 
 .nl-cart-badge {
-  position: absolute;
-  top: 0px;
-  right: 0px;
   height: 18px;
-  width: 18px;
+  min-width: 18px;
+  padding: 0 4px;
   border-radius: 9999px;
   background-color: var(--nl-cart-dot);
   color: #ffffff;
@@ -220,6 +381,97 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Mobile Menu Button */
+.nl-mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--nl-foreground);
+}
+
+@media (min-width: 900px) {
+  .nl-mobile-menu-btn {
+    display: none;
+  }
+}
+
+/* Mobile Drawer */
+.nl-mobile-drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--nl-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-mobile-drawer.is-open {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.nl-mobile-drawer-inner {
+  padding: 24px 20px 36px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.nl-mobile-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nl-mobile-group-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--nl-muted-foreground);
+  border-bottom: 1px solid var(--nl-border);
+  padding-bottom: 6px;
+}
+
+.nl-mobile-link {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nl-foreground);
+  text-decoration: none;
+}
+
+.nl-mobile-subgroup {
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.nl-mobile-subgroup-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #444444;
+}
+
+.nl-mobile-sublink {
+  font-size: 13px;
+  color: var(--nl-muted-foreground);
+  text-decoration: none;
+  padding: 2px 0;
 }
 
 .nl-announcement-strip {
@@ -677,37 +929,40 @@ body, html {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 64px 20px;
+  gap: 48px;
+  padding: 80px 20px 48px 20px;
 }
 
 @media (min-width: 640px) {
-  .nl-footer-inner { padding: 64px 32px; }
+  .nl-footer-inner { padding: 80px 32px 48px 32px; }
 }
 
 @media (min-width: 1024px) {
-  .nl-footer-inner { padding: 64px 48px; }
+  .nl-footer-inner { padding: 96px 48px 56px 48px; }
 }
 
-.nl-footer-top {
+.nl-footer-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 900px) {
+  .nl-footer-main {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 64px;
+  }
+}
+
+.nl-footer-brand-col {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 40px;
-}
-
-@media (min-width: 640px) {
-  .nl-footer-top {
-    flex-direction: row;
-    align-items: flex-end;
-  }
+  gap: 16px;
 }
 
 .nl-footer-brand {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.5vw, 4.25rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -717,18 +972,753 @@ body, html {
 
 .nl-footer-tagline {
   max-width: 320px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
   margin: 0;
   line-height: 1.6;
 }
 
-.nl-footer-bottom-note {
-  font-size: 10px;
+.nl-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.nl-footer-social-link {
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+}
+
+.nl-footer-social-link:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.nl-footer-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 20px;
+}
+
+@media (min-width: 640px) {
+  .nl-footer-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+}
+
+.nl-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nl-footer-col-title {
+  font-size: 12px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.18em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.nl-footer-col-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nl-footer-col-list li a {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  line-height: 1.4;
+}
+
+.nl-footer-col-list li a:hover {
+  color: #ffffff;
+}
+
+.nl-footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 32px;
+}
+
+@media (min-width: 640px) {
+  .nl-footer-bottom {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.nl-footer-bottom-note {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.45);
   margin: 0;
 }
+
+/* ==========================================================================
+   New Consistent Northline Editorial Sections
+   ========================================================================== */
+
+/* Shared Section Utilities */
+/* Unified Container & Section Layouts */
+.nl-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .nl-container { padding: 0 32px; }
+}
+
+@media (min-width: 1024px) {
+  .nl-container { padding: 0 48px; }
+}
+
+.nl-section-header-centered {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 680px;
+  margin: 0 auto 48px auto;
+}
+
+.nl-section-subtitle {
+  font-size: 14px;
+  color: var(--nl-muted-foreground);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.nl-btn-editorial {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--nl-foreground);
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--nl-foreground);
+  transition: opacity 0.2s ease, gap 0.2s ease;
+}
+
+.nl-btn-editorial:hover {
+  opacity: 0.6;
+  gap: 14px;
+}
+
+/* 1. Shop By Category (3 Cards) */
+.nl-categories-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--nl-border);
+}
+
+@media (min-width: 1024px) {
+  .nl-categories-section { padding: 96px 0; }
+}
+
+.nl-categories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .nl-categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.nl-category-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  overflow: hidden;
+  background-color: var(--nl-card);
+}
+
+.nl-category-image-wrapper {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nl-category-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-category-card:hover .nl-category-image {
+  transform: scale(1.06);
+}
+
+.nl-category-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777777;
+}
+
+.nl-category-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
+  transition: opacity 0.3s ease;
+}
+
+.nl-category-card:hover .nl-category-overlay {
+  opacity: 0.85;
+}
+
+.nl-category-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 2;
+}
+
+.nl-category-sub {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.nl-category-name {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  color: #ffffff;
+}
+
+.nl-category-arrow {
+  margin-top: 8px;
+  color: #ffffff;
+  transition: transform 0.25s ease;
+}
+
+.nl-category-card:hover .nl-category-arrow {
+  transform: translateX(6px);
+}
+
+.nl-categories-footer {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 2. Most Loved / Best Sellers (4 Desktop, 2 Mobile) */
+.nl-bestsellers-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--nl-border);
+}
+
+@media (min-width: 1024px) {
+  .nl-bestsellers-section { padding: 96px 0; }
+}
+
+.nl-bestsellers-subtext {
+  font-size: 13px;
+  color: var(--nl-muted-foreground);
+  margin-top: 8px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+.nl-bestsellers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .nl-bestsellers-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+.nl-bestsellers-cta {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 3. Brand Story (Exact 2-column Northline split) */
+.nl-story-section {
+  border-top: 1px solid var(--nl-border);
+  background-color: var(--nl-background);
+}
+
+.nl-story-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  align-items: center;
+  gap: 48px;
+  padding: 80px 20px;
+}
+
+@media (min-width: 640px) {
+  .nl-story-grid { padding: 80px 32px; }
+}
+
+@media (min-width: 768px) {
+  .nl-story-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nl-story-grid {
+    padding: 112px 48px;
+  }
+}
+
+.nl-story-media-box {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--nl-card);
+}
+
+.nl-story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nl-story-content-box {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 5. Promotional Banner */
+.nl-promo-banner-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-top: 1px solid var(--nl-border);
+}
+
+.nl-promo-banner-inner {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .nl-promo-banner-inner {
+    min-height: 560px;
+  }
+}
+
+.nl-promo-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nl-promo-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.nl-promo-placeholder-bg {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #2e2e2e 0%, #111111 100%);
+}
+
+.nl-promo-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #000000;
+}
+
+.nl-promo-content-container {
+  position: relative;
+  z-index: 2;
+  padding: 80px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .nl-promo-content-container { padding: 80px 32px; }
+}
+
+@media (min-width: 1024px) {
+  .nl-promo-content-container { padding: 112px 48px; }
+}
+
+.nl-promo-content {
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nl-promo-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+.nl-promo-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 4rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0;
+}
+
+.nl-promo-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 6. Why Choose Us (4 Columns) */
+.nl-trust-section {
+  padding: 64px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--nl-border);
+  background-color: #ffffff;
+}
+
+@media (min-width: 640px) {
+  .nl-trust-section { padding: 64px 32px; }
+}
+
+@media (min-width: 1024px) {
+  .nl-trust-section { padding: 80px 48px; }
+}
+
+.nl-trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 640px) {
+  .nl-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .nl-trust-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+.nl-trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.nl-trust-icon {
+  flex-shrink: 0;
+  color: var(--nl-foreground);
+  margin-top: 2px;
+}
+
+.nl-trust-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nl-trust-title {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.nl-trust-text {
+  font-size: 12px;
+  color: var(--nl-muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 7. Instagram / Lifestyle Gallery (6 Photos) */
+.nl-gallery-section {
+  padding: 88px 0;
+  border-top: 1px solid var(--nl-border);
+}
+
+.nl-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .nl-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nl-gallery-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+}
+
+.nl-gallery-item {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--nl-card);
+}
+
+.nl-gallery-image-wrapper {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.nl-gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #777777;
+}
+
+.nl-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nl-gallery-item:hover .nl-gallery-overlay {
+  opacity: 1;
+}
+
+.nl-gallery-item:hover .nl-gallery-image {
+  transform: scale(1.08);
+}
+
+.nl-gallery-caption {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nl-gallery-footer {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.nl-gallery-handle {
+  display: inline-block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--nl-foreground);
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--nl-foreground);
+  transition: opacity 0.2s ease;
+}
+
+.nl-gallery-handle:hover {
+  opacity: 0.6;
+}
+
+/* 8. Newsletter Before Footer */
+.nl-newsletter-section {
+  padding: 88px 0;
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.nl-newsletter-box {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.nl-newsletter-header {
+  margin-bottom: 32px;
+}
+
+.nl-newsletter-header .nl-eyebrow {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nl-newsletter-title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.nl-newsletter-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.nl-newsletter-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 540px) {
+  .nl-newsletter-inputs {
+    flex-direction: row;
+    gap: 0;
+  }
+}
+
+.nl-newsletter-input {
+  flex-grow: 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 16px 20px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.nl-newsletter-input:focus {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nl-newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.nl-newsletter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  padding: 16px 28px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.nl-newsletter-btn:hover {
+  background-color: var(--nl-sale-tag);
+  border-color: var(--nl-sale-tag);
+  color: #ffffff;
+}
+
+.nl-newsletter-disclaimer {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 14px;
+  line-height: 1.5;
+}
+
+.nl-newsletter-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 16px;
+  color: #ffffff;
+  font-size: 13px;
+}
+

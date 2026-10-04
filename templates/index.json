@@ -7,7 +7,7 @@
         "title": "Sunset Surf",
         "description": "Heavyweight hoodies, caps, and sets. A focused uniform for coastal days.",
         "btn_text": "Shop the collection",
-        "btn_link": "#products"
+        "btn_link": "#bestsellers"
       }
     },
     "northline_featured": {
@@ -16,18 +16,143 @@
         "tag": "Featured / 01"
       }
     },
+    "northline_categories": {
+      "type": "northline-categories",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "title": "Outerwear",
+            "subtitle": "Men"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Tops",
+            "subtitle": "Women"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Caps & Bags",
+            "subtitle": "Accessories"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3"
+      ],
+      "settings": {
+        "eyebrow": "Browse Departments",
+        "title": "Shop By Category",
+        "btn_text": "View All Categories →",
+        "btn_link": "/collections"
+      }
+    },
+    "northline_bestsellers": {
+      "type": "northline-best-sellers",
+      "settings": {
+        "eyebrow": "Customer Favorites",
+        "title": "Most Loved",
+        "subtitle": "Customer favorites chosen for comfort, quality, and style.",
+        "btn_text": "Shop Best Sellers",
+        "btn_link": "/collections/all"
+      }
+    },
+    "northline_brand_story": {
+      "type": "northline-brand-story",
+      "settings": {
+        "eyebrow": "Heritage & Craft",
+        "title": "Built for Modern Explorers",
+        "text": "<p>We create versatile apparel that blends comfort, durability, and timeless design for everyday adventures.</p>",
+        "btn_text": "Learn Our Story",
+        "btn_link": "/pages/about"
+      }
+    },
     "northline_collection": {
       "type": "northline-collection-grid",
       "settings": {
         "subtitle": "Curated essentials",
         "title": "The Collection",
-        "products_to_show": 12
+        "products_to_show": 3
+      }
+    },
+    "northline_promo_banner": {
+      "type": "northline-promo-banner",
+      "settings": {
+        "eyebrow": "Limited Release",
+        "title": "New Season Arrivals",
+        "subtitle": "Fresh styles inspired by the outdoors.",
+        "btn_text": "Shop Now",
+        "btn_link": "/collections/all",
+        "overlay_opacity": 35
+      }
+    },
+    "northline_why_choose_us": {
+      "type": "northline-why-choose-us",
+      "settings": {
+        "col1_title": "Fast Shipping",
+        "col1_desc": "Dispatched within 24-48 hours globally.",
+        "col2_title": "Secure Checkout",
+        "col2_desc": "256-bit SSL encrypted payment processing.",
+        "col3_title": "Easy Returns",
+        "col3_desc": "30-day hassle-free exchange & return policy.",
+        "col4_title": "Premium Quality",
+        "col4_desc": "Heavyweight fabrics built for everyday durability."
+      }
+    },
+    "northline_lifestyle_gallery": {
+      "type": "northline-lifestyle-gallery",
+      "blocks": {
+        "gal_1": { "type": "gallery_image", "settings": { "caption": "Dawn patrol session" } },
+        "gal_2": { "type": "gallery_image", "settings": { "caption": "Heavyweight hoodie in transit" } },
+        "gal_3": { "type": "gallery_image", "settings": { "caption": "Coastal uniform" } },
+        "gal_4": { "type": "gallery_image", "settings": { "caption": "Pacific surf club" } },
+        "gal_5": { "type": "gallery_image", "settings": { "caption": "Post-surf coffee" } },
+        "gal_6": { "type": "gallery_image", "settings": { "caption": "Weekend getaway" } }
+      },
+      "block_order": [
+        "gal_1",
+        "gal_2",
+        "gal_3",
+        "gal_4",
+        "gal_5",
+        "gal_6"
+      ],
+      "settings": {
+        "eyebrow": "Community & Lifestyle",
+        "title": "Wear It Anywhere",
+        "subtitle": "Customer, travel, and lifestyle moments in the wild.",
+        "tagline": "@sunsetsurfstore on Instagram",
+        "account_link": "https://instagram.com"
+      }
+    },
+    "northline_newsletter": {
+      "type": "northline-newsletter",
+      "settings": {
+        "eyebrow": "Join Us",
+        "title": "Join The Community",
+        "subtitle": "Get new releases, special offers, and style inspiration.",
+        "placeholder": "Enter your email address...",
+        "btn_text": "Subscribe",
+        "disclaimer": "By subscribing, you agree to receive email updates. Unsubscribe anytime."
       }
     }
   },
   "order": [
     "northline_hero",
     "northline_featured",
-    "northline_collection"
+    "northline_categories",
+    "northline_bestsellers",
+    "northline_brand_story",
+    "northline_collection",
+    "northline_promo_banner",
+    "northline_why_choose_us",
+    "northline_lifestyle_gallery",
+    "northline_newsletter"
   ]
 }

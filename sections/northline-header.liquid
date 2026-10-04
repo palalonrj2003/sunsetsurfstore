@@ -1,63 +1,225 @@
 {% comment %}
-  Section: Northline Header with Sunset Surf Logo
-  Minimal sticky navbar with brand logo, Shop link, dynamic cart counter, and announcement strip.
+  Section: Northline Header with Mega/Dropdown Navigation & Mobile Drawer
+  Menus: Shop (with Outerwear, Bottoms, Accessories submenus), Collections, About, Contact
 {% endcomment %}
 
 <header class="nl-header-wrapper" id="NorthlineHeader">
   <div class="nl-header-inner">
-    <a href="{{ routes.root_url }}" class="nl-header-brand" aria-label="{{ shop.name | default: 'SUNSET SURF APPAREL' }}">
-      {%- if section.settings.logo != blank -%}
-        {{ section.settings.logo | image_url: width: 300 | image_tag: class: 'nl-header-logo-img', alt: shop.name }}
-      {%- else -%}
-        <img
-          src="https://www.sunsetsurfstore.com/cdn/shop/files/IMG-8718.png?v=1790864615"
-          alt="SUNSET SURF APPAREL"
-          class="nl-header-logo-img"
-          loading="eager"
-          width="180"
-          height="54"
-        >
-      {%- endif -%}
-    </a>
+    <div class="nl-header-left">
+      <button type="button" class="nl-mobile-menu-btn" id="nlMobileMenuToggle" aria-label="Toggle navigation menu">
+        <svg class="nl-icon-hamburger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg class="nl-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" style="display: none;">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
 
-    <nav class="nl-header-nav">
-      <a href="{{ routes.all_products_collection_url }}" class="nl-header-nav-link">
-        Shop
+      <a href="{{ routes.root_url }}" class="nl-header-brand" aria-label="{{ shop.name | default: 'SUNSET SURF APPAREL' }}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 300 | image_tag: class: 'nl-header-logo-img', alt: shop.name }}
+        {%- else -%}
+          <img
+            src="https://www.sunsetsurfstore.com/cdn/shop/files/IMG-8718.png?v=1790864615"
+            alt="SUNSET SURF APPAREL"
+            class="nl-header-logo-img"
+            loading="eager"
+            width="180"
+            height="54"
+          >
+        {%- endif -%}
       </a>
+    </div>
 
-      <button type="button" class="nl-cart-btn" aria-label="Open cart" onclick="window.location.href='{{ routes.cart_url }}'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Desktop Navigation Menu -->
+    <nav class="nl-header-nav" aria-label="Main Navigation">
+      <!-- 1. Shop Mega Dropdown -->
+      <div class="nl-nav-item nl-nav-dropdown-parent">
+        <a href="{{ routes.all_products_collection_url }}" class="nl-header-nav-link">
+          <span>Shop</span>
+          <svg class="nl-nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="nl-mega-dropdown">
+          <div class="nl-mega-inner">
+            <div class="nl-mega-col">
+              <a href="{{ routes.all_products_collection_url }}" class="nl-mega-heading font-display">All Products</a>
+              <ul class="nl-mega-list font-sans">
+                <li><a href="{{ routes.all_products_collection_url }}">Browse All Essentials</a></li>
+                <li><a href="/collections/all?sort_by=created-descending">Latest Drops</a></li>
+              </ul>
+            </div>
+
+            <div class="nl-mega-col">
+              <a href="/collections/all" class="nl-mega-heading font-display">Outerwear</a>
+              <ul class="nl-mega-list font-sans">
+                <li><a href="/collections/all">Puffer Jackets</a></li>
+                <li><a href="/collections/all">Windbreakers</a></li>
+                <li><a href="/collections/all">Jackets & Zip Ups</a></li>
+              </ul>
+            </div>
+
+            <div class="nl-mega-col">
+              <a href="/collections/all" class="nl-mega-heading font-display">Bottoms</a>
+              <ul class="nl-mega-list font-sans">
+                <li><a href="/collections/all">Cargo Pants</a></li>
+                <li><a href="/collections/all">Utility Pants</a></li>
+                <li><a href="/collections/all">Outdoor Pants & Shorts</a></li>
+              </ul>
+            </div>
+
+            <div class="nl-mega-col">
+              <a href="/collections/all" class="nl-mega-heading font-display">Accessories</a>
+              <ul class="nl-mega-list font-sans">
+                <li><a href="/collections/all">Caps & Hats</a></li>
+                <li><a href="/collections/all">Bags & Gear</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Collections Dropdown -->
+      <div class="nl-nav-item nl-nav-dropdown-parent">
+        <a href="/collections" class="nl-header-nav-link">
+          <span>Collections</span>
+          <svg class="nl-nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="nl-dropdown-simple">
+          <ul class="nl-dropdown-list font-sans">
+            <li><a href="/collections/all">New Arrivals</a></li>
+            <li><a href="#bestsellers">Best Sellers</a></li>
+            <li><a href="#products">Outdoor Essentials</a></li>
+            <li class="nl-dropdown-divider"></li>
+            <li><a href="/collections" class="nl-dropdown-featured">View All Collections →</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. About Dropdown -->
+      <div class="nl-nav-item nl-nav-dropdown-parent">
+        <a href="/pages/about" class="nl-header-nav-link">
+          <span>About</span>
+          <svg class="nl-nav-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </a>
+        <div class="nl-dropdown-simple">
+          <ul class="nl-dropdown-list font-sans">
+            <li><a href="/pages/about">Our Story</a></li>
+            <li><a href="/pages/about">Sustainability</a></li>
+            <li><a href="/pages/contact">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4. Contact Direct Link -->
+      <div class="nl-nav-item">
+        <a href="/pages/contact" class="nl-header-nav-link">
+          <span>Contact</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Header Right / Cart -->
+    <div class="nl-header-right">
+      <button type="button" class="nl-cart-btn font-sans" aria-label="Open cart" onclick="window.location.href='{{ routes.cart_url }}'">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="8" cy="21" r="1"></circle>
           <circle cx="19" cy="21" r="1"></circle>
           <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
         </svg>
+        <span class="nl-cart-label">Cart</span>
         {%- if cart.item_count > 0 -%}
           <span class="nl-cart-badge">{{ cart.item_count }}</span>
         {%- endif -%}
       </button>
-    </nav>
+    </div>
   </div>
 
-  <div class="nl-announcement-strip">
-    <p class="nl-announcement-text">
-      {{ section.settings.announcement | default: 'Opening soon · Early access' }}
-    </p>
+  <!-- Mobile Drawer Menu -->
+  <div class="nl-mobile-drawer" id="nlMobileDrawer">
+    <div class="nl-mobile-drawer-inner">
+      <div class="nl-mobile-nav-group">
+        <span class="nl-mobile-group-title">Shop</span>
+        <a href="{{ routes.all_products_collection_url }}" class="nl-mobile-link font-display">All Products</a>
+        
+        <div class="nl-mobile-subgroup">
+          <span class="nl-mobile-subgroup-label">Outerwear</span>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Puffer Jackets</a>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Windbreakers</a>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Jackets</a>
+        </div>
+
+        <div class="nl-mobile-subgroup">
+          <span class="nl-mobile-subgroup-label">Bottoms</span>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Cargo Pants</a>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Utility Pants</a>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Outdoor Pants</a>
+        </div>
+
+        <div class="nl-mobile-subgroup">
+          <span class="nl-mobile-subgroup-label">Accessories</span>
+          <a href="/collections/all" class="nl-mobile-sublink font-sans">Caps</a>
+        </div>
+      </div>
+
+      <div class="nl-mobile-nav-group">
+        <span class="nl-mobile-group-title">Collections</span>
+        <a href="/collections/all" class="nl-mobile-link font-display">New Arrivals</a>
+        <a href="#bestsellers" class="nl-mobile-link font-display">Best Sellers</a>
+        <a href="#products" class="nl-mobile-link font-display">Outdoor Essentials</a>
+        <a href="/collections" class="nl-mobile-link font-display">View All Collections</a>
+      </div>
+
+      <div class="nl-mobile-nav-group">
+        <span class="nl-mobile-group-title">Company</span>
+        <a href="/pages/about" class="nl-mobile-link font-display">Our Story</a>
+        <a href="/pages/about" class="nl-mobile-link font-display">Sustainability</a>
+        <a href="/pages/contact" class="nl-mobile-link font-display">Contact Us</a>
+      </div>
+    </div>
   </div>
 </header>
 
 <script>
   (function() {
     const header = document.getElementById('NorthlineHeader');
-    if (!header) return;
-    const handleScroll = () => {
-      if (window.scrollY > 8) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    const toggleBtn = document.getElementById('nlMobileMenuToggle');
+    const drawer = document.getElementById('nlMobileDrawer');
+
+    if (header) {
+      const handleScroll = () => {
+        if (window.scrollY > 8) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+    }
+
+    if (toggleBtn && drawer) {
+      toggleBtn.addEventListener('click', function() {
+        const isOpen = drawer.classList.toggle('is-open');
+        toggleBtn.classList.toggle('is-active', isOpen);
+        document.body.classList.toggle('nl-menu-open', isOpen);
+        
+        const iconHam = toggleBtn.querySelector('.nl-icon-hamburger');
+        const iconClose = toggleBtn.querySelector('.nl-icon-close');
+        if (iconHam && iconClose) {
+          iconHam.style.display = isOpen ? 'none' : 'block';
+          iconClose.style.display = isOpen ? 'block' : 'none';
+        }
+      });
+    }
   })();
 </script>
 

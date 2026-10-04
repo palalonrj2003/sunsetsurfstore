@@ -1,0 +1,113 @@
+{% doc %}
+  Section contract: northline-newsletter.liquid
+  Renders a sleek minimalist newsletter sign-up before footer.
+{% enddoc %}
+
+<section class="nl-newsletter-section" id="newsletter">
+  <div class="nl-container">
+    <div class="nl-newsletter-box animate-reveal-up">
+      <div class="nl-newsletter-header">
+        {% if section.settings.eyebrow != blank %}
+          <p class="nl-eyebrow">{{ section.settings.eyebrow }}</p>
+        {% endif %}
+        <h2 class="nl-newsletter-title font-display">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="nl-newsletter-subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+
+      <div class="nl-newsletter-form-wrapper">
+        {% form 'customer', class: 'nl-newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {% if form.posted_successfully? %}
+            <div class="nl-newsletter-success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>{{ 'newsletter.success' | t | default: 'Welcome to Sunset Surf. Check your inbox for updates.' }}</span>
+            </div>
+          {% else %}
+            {% if form.errors %}
+              <div class="nl-newsletter-error">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+            <div class="nl-newsletter-inputs">
+              <input
+                type="email"
+                name="contact[email]"
+                class="nl-newsletter-input"
+                placeholder="{{ section.settings.placeholder }}"
+                value="{{ form.email }}"
+                aria-label="{{ section.settings.placeholder }}"
+                required
+                autocomplete="email"
+              >
+              <button type="submit" class="nl-newsletter-btn">
+                <span>{{ section.settings.btn_text }}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+            {% if section.settings.disclaimer != blank %}
+              <p class="nl-newsletter-disclaimer">{{ section.settings.disclaimer }}</p>
+            {% endif %}
+          {% endif %}
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-northline-newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Join Us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join The Community"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Get new releases, special offers, and style inspiration."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "Enter your email address..."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer Text",
+      "default": "By subscribing, you agree to receive email updates. Unsubscribe anytime."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

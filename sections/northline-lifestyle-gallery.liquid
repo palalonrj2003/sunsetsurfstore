@@ -1,0 +1,145 @@
+{% comment %}
+  Section: Northline Lifestyle Gallery
+  6-image lifestyle and travel gallery featuring real customer & lookbook photography.
+{% endcomment %}
+
+<section class="nl-gallery-section" id="gallery">
+  <div class="nl-container">
+    <div class="nl-collection-header" style="margin-bottom: 32px; border-bottom: none; padding-bottom: 0;">
+      <div>
+        <p class="nl-collection-subtitle">
+          {{ section.settings.eyebrow | default: 'Community & Lifestyle' }}
+        </p>
+        <h2 class="nl-collection-title font-display">
+          {{ section.settings.title | default: 'Wear It Anywhere' }}
+        </h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="nl-bestsellers-subtext font-sans">
+            {{ section.settings.subtitle }}
+          </p>
+        {% endif %}
+      </div>
+      <p class="nl-collection-count font-sans">
+        @SUNSETSURFSTORE
+      </p>
+    </div>
+
+    <div class="nl-gallery-grid">
+      {%- assign fallback_imgs = "https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-35.jpg?v=1789668415,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-46.jpg?v=1789668153,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf_-11.jpg?v=1789668526,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/V1_SunsetSurfCollection-40.jpg?v=1784831953,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/V1_SUNSETSURFELLASHOOT-53.jpg?v=1784925629,https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-66_88ed8ba7-10aa-4556-9190-19165e1365a5.jpg?v=1789693016" | split: "," -%}
+      {%- assign fallback_captions = "Dawn patrol session,Heavyweight hoodie in transit,Coastal uniform,Pacific surf club,Post-surf coffee,Weekend getaway" | split: "," -%}
+
+      {% for block in section.blocks %}
+        {%- assign idx = forloop.index0 -%}
+        <div class="nl-gallery-item" {{ block.shopify_attributes }}>
+          <div class="nl-gallery-image-wrapper">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 800 | image_tag: class: 'nl-gallery-image', loading: 'lazy', widths: '300, 500, 800', alt: block.settings.caption }}
+            {% else %}
+              <img src="{{ fallback_imgs[idx] }}" class="nl-gallery-image" alt="{{ fallback_captions[idx] }}" loading="lazy" width="500" height="500">
+            {% endif %}
+            
+            <a href="{{ block.settings.link | default: 'https://instagram.com' }}" target="_blank" rel="noopener" class="nl-gallery-overlay">
+              <span class="nl-gallery-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </span>
+              <p class="nl-gallery-caption font-sans">{{ block.settings.caption | default: fallback_captions[idx] }}</p>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.tagline != blank %}
+      <div class="nl-gallery-footer">
+        <a href="{{ section.settings.account_link | default: 'https://instagram.com' }}" target="_blank" rel="noopener" class="nl-btn-editorial font-sans">
+          <span>{{ section.settings.tagline }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lifestyle Gallery",
+  "tag": "section",
+  "class": "section-northline-gallery",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Community & Lifestyle"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Wear It Anywhere"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Customer, travel, and lifestyle moments in the wild."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Instagram Handle / CTA",
+      "default": "@sunsetsurfstore on Instagram"
+    },
+    {
+      "type": "url",
+      "id": "account_link",
+      "label": "Social Account Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_image",
+      "name": "Photo (Max 6)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption / Location",
+          "default": "Golden hour on the coast"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle Gallery",
+      "blocks": [
+        { "type": "gallery_image", "settings": { "caption": "Dawn patrol session" } },
+        { "type": "gallery_image", "settings": { "caption": "Heavyweight hoodie in transit" } },
+        { "type": "gallery_image", "settings": { "caption": "Coastal uniform" } },
+        { "type": "gallery_image", "settings": { "caption": "Pacific surf club" } },
+        { "type": "gallery_image", "settings": { "caption": "Post-surf coffee" } },
+        { "type": "gallery_image", "settings": { "caption": "Weekend getaway" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

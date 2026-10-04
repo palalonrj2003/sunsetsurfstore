@@ -1,0 +1,165 @@
+{% comment %}
+  Section: Northline Categories for Sunset Surf Apparel
+  Editorial 3-category showcase with authentic Sunset Surf imagery.
+{% endcomment %}
+
+<section class="nl-categories-section" id="categories">
+  <div class="nl-container">
+    <div class="nl-collection-header" style="margin-bottom: 32px; border-bottom: none; padding-bottom: 0;">
+      <div>
+        <p class="nl-collection-subtitle">
+          {{ section.settings.eyebrow | default: 'Browse Departments' }}
+        </p>
+        <h2 class="nl-collection-title font-display">
+          {{ section.settings.title | default: 'Shop By Category' }}
+        </h2>
+      </div>
+    </div>
+
+    <div class="nl-categories-grid">
+      {% for block in section.blocks %}
+        {%- liquid
+          assign card_image = block.settings.image
+          if card_image == blank
+            if forloop.index == 1
+              assign default_img = 'https://cdn.shopify.com/s/files/1/0711/4696/3195/files/Screenshot_2026-08-26_at_11.22.36_AM.png?v=1787970574'
+            elsif forloop.index == 2
+              assign default_img = 'https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-9_0cb1e699-abea-4c22-86fe-5e84ef1ef6c0.jpg?v=1789700454'
+            else
+              assign default_img = 'https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-127.jpg?v=1789758542'
+            endif
+          endif
+        -%}
+        <a href="{{ block.settings.link | default: block.settings.collection.url | default: '/collections/all' }}" class="nl-category-card" {{ block.shopify_attributes }}>
+          <div class="nl-category-image-wrapper">
+            {% if card_image != blank %}
+              {{ card_image | image_url: width: 1000 | image_tag: class: 'nl-category-image', loading: 'lazy', widths: '400, 600, 800, 1000', alt: block.settings.title }}
+            {% else %}
+              <img src="{{ default_img }}" class="nl-category-image" alt="{{ block.settings.title }}" loading="lazy" width="600" height="750">
+            {% endif %}
+            <div class="nl-category-overlay"></div>
+          </div>
+          <div class="nl-category-content">
+            <span class="nl-category-sub font-sans">{{ block.settings.subtitle }}</span>
+            <h3 class="nl-category-name font-display">{{ block.settings.title }}</h3>
+            <span class="nl-category-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.btn_text != blank %}
+      <div class="nl-categories-footer">
+        <a href="{{ section.settings.btn_link | default: '/collections' }}" class="nl-btn-editorial">
+          <span>{{ section.settings.btn_text }}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop By Category",
+  "tag": "section",
+  "class": "section-northline-categories",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Men / Women / Accessories"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop By Category"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "View All Categories →"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Outerwear"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle / Sub-label",
+          "default": "Men"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Custom URL (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Category",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Outerwear",
+            "subtitle": "Men"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Tops",
+            "subtitle": "Women"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Caps & Bags",
+            "subtitle": "Accessories"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

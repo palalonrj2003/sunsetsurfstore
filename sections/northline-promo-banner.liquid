@@ -1,0 +1,110 @@
+{% comment %}
+  Section: Northline Promotional Banner
+  Full-width cinematic background banner with authentic Sunset Surf coastal visual.
+{% endcomment %}
+
+<section class="nl-promo-banner-section" id="promo">
+  <div class="nl-promo-banner-inner">
+    <div class="nl-promo-bg-wrapper">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 2200
+          | image_tag:
+            class: 'nl-promo-bg-image',
+            loading: 'lazy',
+            widths: '800, 1200, 1600, 2200',
+            alt: section.settings.title
+        }}
+      {%- else -%}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-6_3b6484f2-3eee-4b82-b032-582197b952f0.jpg?v=1789751841"
+          class="nl-promo-bg-image"
+          alt="Sunset Surf Arrivals"
+          loading="lazy"
+          width="1920"
+          height="800"
+        >
+      {%- endif -%}
+      <div class="nl-promo-overlay" style="opacity: {{ section.settings.overlay_opacity }}%;"></div>
+    </div>
+
+    <div class="nl-promo-content-container">
+      <div class="nl-promo-content animate-reveal-up">
+        {% if section.settings.eyebrow != blank %}
+          <span class="nl-promo-eyebrow">{{ section.settings.eyebrow }}</span>
+        {% endif %}
+        <h2 class="nl-promo-title font-display">{{ section.settings.title }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <p class="nl-promo-subtitle font-sans">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        {% if section.settings.btn_text != blank %}
+          <div style="margin-top: 16px;">
+            <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="nl-btn-primary font-sans" style="background-color: #ffffff; color: #000000; border: none; padding: 16px 36px; display: inline-block;">
+              {{ section.settings.btn_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Banner",
+  "tag": "section",
+  "class": "section-northline-promo-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 10,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Dark Overlay Opacity",
+      "default": 35
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "New Season Arrivals"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Fresh styles inspired by the outdoors."
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Banner"
+    }
+  ]
+}
+{% endschema %}

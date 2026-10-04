@@ -1,0 +1,106 @@
+{% comment %}
+  Section: Northline Brand Story
+  Split layout (image left, text right) matching Northline typography, padding, and spacing.
+{% endcomment %}
+
+<section class="nl-story-section" id="story">
+  <div class="nl-story-grid">
+    <div class="nl-story-media-box">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            class: 'nl-story-img',
+            loading: 'lazy',
+            widths: '600, 900, 1200, 1400',
+            alt: section.settings.title
+        }}
+      {%- else -%}
+        <img
+          src="https://cdn.shopify.com/s/files/1/0711/4696/3195/files/SunsetSurf-108_e363a7fa-c261-4ed8-b47d-a381d60cb5ad.jpg?v=1789752225"
+          alt="Sunset Surf Heritage"
+          class="nl-story-img"
+          loading="lazy"
+          width="1200"
+          height="800"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="nl-story-content-box">
+      <p class="nl-featured-tag">
+        {{ section.settings.eyebrow | default: 'Heritage & Craft' }}
+      </p>
+
+      <h2 class="nl-featured-title font-display">
+        {{ section.settings.title | default: 'Built for Modern Explorers' }}
+      </h2>
+
+      <div class="nl-featured-desc font-sans" style="margin-top: 20px; line-height: 1.7; color: var(--nl-muted-foreground); max-width: 480px;">
+        {{ section.settings.text }}
+      </div>
+
+      {% if section.settings.btn_text != blank %}
+        <div style="margin-top: 32px;">
+          <a href="{{ section.settings.btn_link | default: '/pages/about' }}" class="nl-featured-link font-sans">
+            <span>{{ section.settings.btn_text }}</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "tag": "section",
+  "class": "northline-brand-story-wrapper",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story Image (Left)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Heritage & Craft"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Built for Modern Explorers"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Story Paragraphs",
+      "default": "<p>We create versatile apparel that blends comfort, durability, and timeless design for everyday adventures.</p>"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Learn Our Story"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}
